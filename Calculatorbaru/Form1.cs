@@ -21,7 +21,7 @@ namespace Calculatorbaru
         private void btnHitung_Click(object sender, EventArgs e)
         {
             Form2 f2 = new Form2();
-            f2.OnCreate += new Form2.CreateUpdateEventHandler(this.FrmEntry_OnCreate);
+            f2.OnCreate += FrmEntry_OnCreate;
             f2.ShowDialog();
         }
 
@@ -29,9 +29,9 @@ namespace Calculatorbaru
         {
 
         }
-        private void FrmEntry_OnCreate(string nama, string operasi, double a, double b, double hasils)
+        private void FrmEntry_OnCreate(Kalkulator klk)
         {
-            lstboxHasil.Items.Add("Hasil " + nama + " " + a + " " + operasi + b + "=" + hasils);
+            lstboxHasil.Items.Add("Hasil " + klk.nama + " " + klk.a + " " + klk.operasi + " " + klk.b + " " + "=" + " " + klk.hasils);
         }
     }
 }

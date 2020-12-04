@@ -12,8 +12,11 @@ namespace Calculatorbaru
 {
     public partial class Form2 : Form
     {
-        public delegate void CreateUpdateEventHandler(string nama, string operasi, double a, double b, double hasils);
+        public delegate void CreateUpdateEventHandler(Kalkulator klk);
         public event Form2.CreateUpdateEventHandler OnCreate;
+        private Kalkulator klk;
+
+
         public Form2()
         {
             InitializeComponent();
@@ -21,12 +24,12 @@ namespace Calculatorbaru
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            Double hasils, NilaiA, NilaiB;
-            string nama = this.cmbOperasi.Text.ToLower();
-            string operasi = string.Empty;
-            hasils = 0;
-            NilaiA = Double.Parse(this.txtNilaiA.Text);
-            NilaiB = Double.Parse(this.txtNilaiB.Text);
+            klk = new Kalkulator();
+            klk.nama = this.cmbOperasi.Text.ToLower();
+            klk.operasi = string.Empty;
+            klk.hasils = 0;
+            klk.a = Double.Parse(this.txtNilaiA.Text);
+            klk.b = Double.Parse(this.txtNilaiB.Text);
 
 
             if (this.cmbOperasi.SelectedIndex == -1)
@@ -35,23 +38,27 @@ namespace Calculatorbaru
             }
             else if (this.cmbOperasi.SelectedIndex == 0)
             {
-                hasils = NilaiA + NilaiB;
+                klk.hasils = klk.a + klk.b;
+                klk.operasi = "+";
 
             }
             else if (this.cmbOperasi.SelectedIndex == 1)
             {
-                hasils = NilaiA - NilaiB;
+                klk.hasils = klk.a - klk.b;
+                klk.operasi = "-";
             }
             else if (this.cmbOperasi.SelectedIndex == 2)
             {
-                hasils = NilaiA * NilaiB;
+                klk.hasils = klk.a * klk.b;
+                klk.operasi = "*";
             }
             else if (this.cmbOperasi.SelectedIndex == 3)
             {
-                hasils = NilaiA / NilaiB;
+                klk.hasils = klk.a / klk.b;
+                klk.operasi = "/";
             }
 
-            this.OnCreate(nama, operasi, NilaiA, NilaiB, hasils);
+            this.OnCreate(klk);
         }
     }
 }
